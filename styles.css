@@ -940,30 +940,10 @@ body {
   transform: scale(1) translateY(0);
 }
 
-/* Print Decorative Hearts */
-.print-decor-hearts {
-  position: absolute;
-  font-size: 1.8rem;
-  z-index: 8;
-  filter: drop-shadow(0 4px 10px rgba(255, 71, 126, 0.5));
-}
-.print-decor-hearts.left-top { top: 1.2rem; left: 1.2rem; }
-.print-decor-hearts.right-top { top: 1.2rem; right: 4.5rem; }
-.print-decor-hearts.left-bottom { bottom: 5rem; left: 1.5rem; }
-.print-decor-hearts.right-bottom { bottom: 5rem; right: 1.5rem; }
-
+/* Print Decorative Elements (Hidden on screen, Active on Print/PDF) */
+.print-decor-hearts,
 .card-memory-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1rem;
-  background: #ffe4e6;
-  border: 1.5px solid #ffb3c1;
-  border-radius: 50px;
-  color: #e60049;
-  font-size: 0.85rem;
-  font-weight: 800;
-  margin-bottom: 0.8rem;
+  display: none;
 }
 
 .btn-close-modal {
@@ -1320,8 +1300,8 @@ body {
 }
 
 /* ==========================================================
-   HD FESTIVE HEARTS PRINT / SAVE CARD PRESET (HEBOH & WOW 💖)
-   Preserves vibrant pink background, floating hearts, NO X button!
+   HD FESTIVE HEARTS PRINT / SAVE CARD PRESET (SUPER WAH 💖)
+   Activated ONLY during PDF export, hides X and action buttons!
    ========================================================== */
 @media print {
   @page {
@@ -1338,7 +1318,7 @@ body {
     min-height: 100vh !important;
   }
 
-  /* Hide navbar, footer, music widget, search card, lightbox, canvas, and overlay */
+  /* Hide web elements: navbar, footer, music widget, canvas, and intro overlay */
   .navbar,
   .footer,
   #hero, #stats, #gallery,
@@ -1355,7 +1335,7 @@ body {
     visibility: hidden !important;
   }
 
-  /* Display ONLY letter modal centered on print page */
+  /* Display ONLY letter modal centered on PDF export page */
   .modal-overlay#letterModal {
     position: absolute !important;
     top: 0 !important;
@@ -1377,7 +1357,7 @@ body {
     width: 100% !important;
     max-width: 650px !important;
     max-height: none !important;
-    border: 5px solid #ff477e !important;
+    border: 6px double #ff477e !important;
     border-radius: 32px !important;
     background: #ffffff !important;
     box-shadow: 0 25px 70px rgba(255, 71, 126, 0.45) !important;
@@ -1391,13 +1371,13 @@ body {
   .print-decor-hearts {
     display: block !important;
     font-size: 2.2rem !important;
+    position: absolute !important;
+    z-index: 10 !important;
   }
-
-  .letter-body {
-    padding: 3rem 2.5rem 2rem 2.5rem !important;
-    max-height: none !important;
-    overflow: visible !important;
-  }
+  .print-decor-hearts.left-top { top: 1rem !important; left: 1.2rem !important; }
+  .print-decor-hearts.right-top { top: 1rem !important; right: 1.2rem !important; }
+  .print-decor-hearts.left-bottom { bottom: 1.2rem !important; left: 1.2rem !important; }
+  .print-decor-hearts.right-bottom { bottom: 1.2rem !important; right: 1.2rem !important; }
 
   .card-memory-tag {
     display: inline-flex !important;
@@ -1405,10 +1385,17 @@ body {
     border: 1.5px solid #ffb3c1 !important;
     color: #e60049 !important;
     font-weight: 800 !important;
-    padding: 0.4rem 1rem !important;
+    padding: 0.4rem 1.1rem !important;
     border-radius: 50px !important;
+    margin-bottom: 0.8rem !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+  }
+
+  .letter-body {
+    padding: 3rem 2.5rem 2.2rem 2.5rem !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   .letter-header {
