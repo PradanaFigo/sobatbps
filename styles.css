@@ -940,8 +940,8 @@ body {
   transform: scale(1) translateY(0);
 }
 
-/* Print Decorative Elements (Hidden on screen, Active on Print/PDF) */
-.print-decor-hearts,
+/* Hidden on web screen; activated on PDF export */
+.pdf-heart,
 .card-memory-tag {
   display: none;
 }
@@ -1300,8 +1300,8 @@ body {
 }
 
 /* ==========================================================
-   HD FESTIVE HEARTS PRINT / SAVE CARD PRESET (SUPER WAH 💖)
-   Activated ONLY during PDF export, hides X and action buttons!
+   HD HEBOH FLOATING HEARTS PDF EXPORT PRESET 💖🌸✨
+   Displays 50+ floating hearts rain, NO X button, NO action buttons!
    ========================================================== */
 @media print {
   @page {
@@ -1318,19 +1318,24 @@ body {
     min-height: 100vh !important;
   }
 
-  /* Hide web elements: navbar, footer, music widget, canvas, and intro overlay */
+  /* Keep particles canvas VISIBLE so floating hearts rain over PDF background! */
+  #particlesCanvas {
+    display: block !important;
+    visibility: visible !important;
+    z-index: 1 !important;
+  }
+
+  /* Hide UI elements: navbar, footer, music widget, search card, intro overlay, AND close button & action buttons */
   .navbar,
   .footer,
   #hero, #stats, #gallery,
-  #particlesCanvas,
   #introStageOverlay,
   #envelopeAnimOverlay,
   .audio-player-widget,
   .toast-container,
   .btn-close-modal,
   .modal-actions,
-  .cursor-sparkle,
-  .heart-firework-particle {
+  .cursor-sparkle {
     display: none !important;
     visibility: hidden !important;
   }
@@ -1351,49 +1356,59 @@ body {
     opacity: 1 !important;
     visibility: visible !important;
     padding: 1.5rem !important;
+    z-index: 1000 !important;
   }
 
   .letter-container {
     width: 100% !important;
-    max-width: 650px !important;
+    max-width: 660px !important;
     max-height: none !important;
     border: 6px double #ff477e !important;
-    border-radius: 32px !important;
-    background: #ffffff !important;
-    box-shadow: 0 25px 70px rgba(255, 71, 126, 0.45) !important;
+    border-radius: 36px !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    box-shadow: 0 30px 90px rgba(255, 71, 126, 0.55), 0 0 60px rgba(255, 182, 193, 0.8) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     page-break-inside: avoid !important;
     position: relative !important;
     transform: none !important;
+    overflow: visible !important;
   }
 
-  .print-decor-hearts {
+  /* Dense Floating Hearts Scattered Around Card */
+  .pdf-heart {
     display: block !important;
-    font-size: 2.2rem !important;
     position: absolute !important;
-    z-index: 10 !important;
+    font-size: 2.4rem !important;
+    z-index: 15 !important;
+    filter: drop-shadow(0 4px 15px rgba(255, 71, 126, 0.65)) !important;
   }
-  .print-decor-hearts.left-top { top: 1rem !important; left: 1.2rem !important; }
-  .print-decor-hearts.right-top { top: 1rem !important; right: 1.2rem !important; }
-  .print-decor-hearts.left-bottom { bottom: 1.2rem !important; left: 1.2rem !important; }
-  .print-decor-hearts.right-bottom { bottom: 1.2rem !important; right: 1.2rem !important; }
+  .pdf-heart.h1 { top: -25px !important; left: 30px !important; transform: rotate(-15deg); }
+  .pdf-heart.h2 { top: -25px !important; right: 40px !important; transform: rotate(15deg); }
+  .pdf-heart.h3 { top: 40% !important; left: -25px !important; transform: rotate(-25deg); }
+  .pdf-heart.h4 { top: 45% !important; right: -25px !important; transform: rotate(20deg); }
+  .pdf-heart.h5 { bottom: -20px !important; left: 40px !important; transform: rotate(10deg); }
+  .pdf-heart.h6 { bottom: -20px !important; right: 50px !important; transform: rotate(-10deg); }
+  .pdf-heart.h7 { top: 18% !important; right: -22px !important; font-size: 1.8rem !important; }
+  .pdf-heart.h8 { bottom: 25% !important; left: -22px !important; font-size: 1.8rem !important; }
 
   .card-memory-tag {
     display: inline-flex !important;
     background: #ffe4e6 !important;
-    border: 1.5px solid #ffb3c1 !important;
+    border: 2px solid #ffb3c1 !important;
     color: #e60049 !important;
     font-weight: 800 !important;
-    padding: 0.4rem 1.1rem !important;
+    font-size: 0.9rem !important;
+    padding: 0.45rem 1.25rem !important;
     border-radius: 50px !important;
-    margin-bottom: 0.8rem !important;
+    margin-bottom: 0.9rem !important;
+    box-shadow: 0 4px 15px rgba(255, 71, 126, 0.2) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
   .letter-body {
-    padding: 3rem 2.5rem 2.2rem 2.5rem !important;
+    padding: 3.2rem 2.75rem 2.4rem 2.75rem !important;
     max-height: none !important;
     overflow: visible !important;
   }
@@ -1405,7 +1420,7 @@ body {
   }
 
   .letter-receiver-info h2 {
-    font-size: 2.3rem !important;
+    font-size: 2.4rem !important;
     color: #e60049 !important;
   }
 
@@ -1422,7 +1437,7 @@ body {
   }
 
   .signature-text {
-    font-size: 2.7rem !important;
+    font-size: 2.8rem !important;
     color: #ff477e !important;
   }
 }
