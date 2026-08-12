@@ -707,13 +707,6 @@ body {
   transform: translateY(-250px);
 }
 
-.paper-preview-text {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  color: var(--pink-deep);
-  font-weight: 700;
-}
-
 /* SECTIONS */
 .stats-section, .gallery-section {
   padding: 5rem 0;
@@ -1164,18 +1157,24 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* NAVBAR FIX: PREVENT BRAND & BUTTON OVERLAP */
+  /* HIDE MIDDLE NAV-LINKS ON MOBILE SO NAVBAR IS CLEAN 1-LINE */
+  .nav-links {
+    display: none !important;
+  }
   .navbar {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     width: calc(100% - 1.5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .nav-brand {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     gap: 0.4rem;
   }
   .brand-icon {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     font-size: 1rem;
   }
   .btn-small-pink {
@@ -1239,15 +1238,16 @@ body {
   .envelope-prompt-text {
     font-size: 1.05rem;
     margin-bottom: 1.25rem;
+    padding: 0 1rem;
   }
   .anim-envelope-box {
-    width: 320px;
-    height: 240px;
+    width: 310px;
+    height: 230px;
   }
   .anim-envelope-flap {
-    border-left-width: 160px;
-    border-right-width: 160px;
-    border-top-width: 120px;
+    border-left-width: 155px;
+    border-right-width: 155px;
+    border-top-width: 115px;
   }
   .anim-wax-seal {
     width: 68px;
@@ -1255,17 +1255,17 @@ body {
     font-size: 1.7rem;
   }
   .anim-receiver {
-    font-size: 1.25rem;
-    margin-top: 1.8rem;
+    font-size: 1.18rem;
+    margin-top: 2rem;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 10;
   }
   .anim-stamp {
     top: 0.85rem;
     right: 0.85rem;
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
-  }
-  .paper-preview-text {
-    font-size: 1rem;
   }
   .anim-envelope.open .anim-letter-paper {
     transform: translateY(-160px);
