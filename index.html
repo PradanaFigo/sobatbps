@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobat BPS Farewell & Secret Memory Box 🔒💖</title>
+  <meta name="description" content="Pengalaman interaktif 4-Stage perpisahan magang BPS untuk Fachri, Ica, Cynthia, Nandra, dan Kalila.">
+  <link rel="stylesheet" href="styles.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Ambient Floating Particles Canvas (NOW VISIBLE ON ALL OVERLAYS) -->
+  <canvas id="particlesCanvas"></canvas>
+
+  <!-- ==========================================================
+       4-STAGE CINEMATIC INTERACTIVE STORY OVERLAY
+       Order: Kapsul -> Kata-Kata Manis -> 4 Foto Sejajar -> Ketik Nama -> Surat
+       ========================================================== -->
+  <div id="introStageOverlay" class="intro-stage-overlay active">
+    <div class="intro-stage-content">
+      
+      <!-- STAGE 1: CLICK GIFT CAPSULE TO START -->
+      <div id="introGiftBox" class="intro-glass-card animate-card-entry">
+        <div class="gift-capsule-wrapper">
+          <div class="glow-aura-ring"></div>
+          <div class="intro-gift-icon" id="giftIconBtn">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+        </div>
+        <h2 class="glow-title">Kapsul Kenangan Magang BPS 💖</h2>
+        <p class="intro-subtext">Klik kapsul kenangan berkilau di atas untuk memulai cerita kita!</p>
+      </div>
+
+      <!-- STAGE 2: TOUCHING SWEET WORDS & GRATITUDE -->
+      <div id="sweetWordsStage" class="intro-glass-card sweet-words-card hidden">
+        <div class="heart-badge-icon"><i class="fa-solid fa-heart"></i></div>
+        <h2 class="glow-title">Dua Bulan Banyak Cerita ✨</h2>
+        <p id="sweetWordsText" class="sweet-words-text">
+          <!-- Typewriter emotional text will appear here -->
+        </p>
+        <button id="nextToPhotosBtn" class="btn-pink-action btn-large-glow" style="margin-top: 1.75rem;">
+          <span>Lihat Foto Kenangan</span>
+          <i class="fa-solid fa-images"></i>
+        </button>
+      </div>
+
+      <!-- STAGE 3: FLOATING POLAROID PARADE (4 FOTO SEJAJAR!) -->
+      <div id="photoParade" class="intro-glass-card photo-parade-container hidden">
+        <h3 class="parade-title glow-title">Momen Manis Magang BPS ✨</h3>
+        <div id="paradePhotos" class="parade-photos-row-4">
+          <!-- Dynamically filled with 4 photos in 1 single row -->
+        </div>
+        <button id="nextToNameBtn" class="btn-pink-action btn-large-glow" style="margin-top: 1.75rem;">
+          <span>Buka Surat Rahasiaku</span>
+          <i class="fa-solid fa-envelope"></i>
+        </button>
+      </div>
+
+      <!-- STAGE 4: TYPE NAME INPUT GATEKEEPER -->
+      <div id="introNameGate" class="intro-glass-card intro-name-card hidden">
+        <div class="wax-seal-icon"><i class="fa-solid fa-key"></i></div>
+        <h2 class="glow-title">Siapa Namamu? 🔑</h2>
+        <p class="intro-subtext">Ketik namamu (Fachri, Ica, Cynthia, Nandra, atau Kalila) untuk membuka amplop rahasiamu:</p>
+
+        <form id="introSearchForm" onsubmit="return false;" style="margin-top: 1.5rem;">
+          <div class="search-input-group">
+            <i class="fa-solid fa-user search-icon"></i>
+            <input 
+              type="text" 
+              id="introNameInput" 
+              class="search-input" 
+              placeholder="Ketik namamu di sini..." 
+              autocomplete="off" 
+              required
+            >
+          </div>
+          <button type="submit" id="introOpenBtn" class="btn-open-lock">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Lihat Amplop Rahasiaku</span>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NAVIGATION BAR (ACTIVE AFTER UNLOCK) -->
+  <nav class="navbar">
+    <a href="#" class="nav-brand">
+      <div class="brand-icon"><i class="fa-solid fa-heart"></i></div>
+      <span>Sobat BPS 💖</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero"><i class="fa-solid fa-key"></i> Buka Surat</a></li>
+      <li><a href="#stats"><i class="fa-solid fa-sparkles"></i> Counter Momen</a></li>
+      <li><a href="#gallery"><i class="fa-solid fa-images"></i> Galeri Kenangan</a></li>
+    </ul>
+    <a href="#hero" class="btn-small-pink">
+      <i class="fa-solid fa-lock-open"></i> Ketik Namamu
+    </a>
+  </nav>
+
+  <!-- HERO SECTION WITH SECRET GATEKEEPER INPUT -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="hero-badge">
+        <i class="fa-solid fa-sparkles"></i> 2 Bulan Kenangan Magang BPS 🌸
+      </div>
+      <h1 class="hero-title">
+        Perpisahan Ini Cuma Awal,<br>
+        <span class="glow-text">Kenangan Kita Abadi Selamanya! ✨</span>
+      </h1>
+      <p class="hero-desc">
+        Terima kasih untuk 60 hari yang manis, gelak tawa, cerita seru, dan kerja keras bersama! Ketik namamu di bawah untuk membuka amplop surat rahasia khusus milikmu 💕
+      </p>
+
+      <!-- SEARCH CARD -->
+      <div class="search-card">
+        <div class="search-header">
+          <h3><i class="fa-solid fa-user-lock" style="color: var(--pink-primary); margin-right: 8px;"></i> Pembuka Amplop Rahasia</h3>
+          <p>Ketik namamu sendiri (Fachri, Ica, Cynthia, Nandra, atau Kalila) untuk membuka suratmu!</p>
+        </div>
+
+        <form id="searchForm" onsubmit="return false;">
+          <div class="search-input-group">
+            <i class="fa-solid fa-key search-icon"></i>
+            <input 
+              type="text" 
+              id="nameInput" 
+              class="search-input" 
+              placeholder="Ketik namamu sendiri di sini..." 
+              autocomplete="off" 
+              required
+            >
+          </div>
+          <button type="submit" id="openBtn" class="btn-open-lock">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Buka Surat Rahasiaku</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICS COUNTER SECTION -->
+  <section id="stats" class="stats-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-clock-rotate-left"></i> Jejak Waktu</span>
+        <h2 class="section-title">2 Bulan <span>Kenangan Indah</span></h2>
+        <p class="section-subtitle">Momen manis perjuangan magang yang akan selalu kita ingat bersama.</p>
+      </div>
+
+      <div id="statsGrid" class="stats-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- POLAROID GALLERY SECTION -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-camera"></i> Galeri Kenangan</span>
+        <h2 class="section-title">Momen Manis <span>Sobat BPS</span></h2>
+        <p class="section-subtitle">Klik foto polaroid untuk memperbesar dan melihat cerita kenangannya!</p>
+      </div>
+
+      <div id="galleryGrid" class="gallery-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- POLAROID LIGHTBOX MODAL -->
+  <div id="lightboxModal" class="modal-overlay">
+    <div class="lightbox-container">
+      <button id="closeLightboxBtn" class="btn-close-modal" aria-label="Tutup Lightbox">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt="Foto Kenangan Magang" class="lightbox-img">
+      <div class="lightbox-caption">
+        <h3 id="lightboxTitle">Judul Foto</h3>
+        <p id="lightboxDesc">Deskripsi foto kenangan...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REALISTIC GIANT 3D ENVELOPE OPENING STAGE (CLICK TO UNSEAL!) -->
+  <div id="envelopeAnimOverlay" class="envelope-anim-overlay">
+    <div class="envelope-prompt-text">Klik Segel Lilin / Amplop untuk Membuka Surat Rahasiamu! 💌✨</div>
+    <div class="anim-envelope-box" id="giantEnvelopeClickTarget">
+      <div class="anim-envelope" id="animEnvelopeObj">
+        <div class="anim-envelope-flap" id="animEnvelopeFlap"></div>
+        <div class="anim-wax-seal" id="animWaxSeal">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <div class="anim-stamp">BPS</div>
+        <div class="anim-receiver" id="animReceiverName">Surat Rahasia</div>
+        <div class="anim-letter-paper" id="animLetterPaper">
+          <div class="paper-preview-text">Membuka Surat Kenangan... 💕</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONALIZED LETTER MODAL -->
+  <div id="letterModal" class="modal-overlay">
+    <div class="letter-container">
+      <button id="closeModalBtn" class="btn-close-modal" aria-label="Tutup Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="letter-body">
+        <div class="letter-header">
+          <div class="letter-receiver-info">
+            <h2 id="modalName">Nama Teman</h2>
+          </div>
+        </div>
+
+        <div id="modalLetterText" class="letter-content-text">
+          <!-- Typewriter content will appear here -->
+        </div>
+
+        <div class="letter-footer">
+          <div class="signature-block" style="margin-left: auto;">
+            <div class="signature-text">Figo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="copyLetterBtn" class="btn-secondary-light">
+          <i class="fa-solid fa-copy"></i> Salin Pesan
+        </button>
+        <button id="printCardBtn" class="btn-pink-action">
+          <i class="fa-solid fa-heart"></i> Simpan Kartu Kenangan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SINGLE SWEET MUSIC PLAYER WIDGET -->
+  <div id="audioWidget" class="audio-player-widget">
+    <button id="audioToggleBtn" class="audio-btn" aria-label="Play/Pause Audio">
+      <i id="audioIcon" class="fa-solid fa-music"></i>
+    </button>
+    <span class="audio-title">Musik Kenangan</span>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Sobat Magang BPS 💖</div>
+      <p class="footer-text">
+        "Dua bulan penuh kebersamaan, cerita, dan tawa yang akan selalu tersimpan indah di hati."
+      </p>
+    </div>
+  </footer>
+
+  <!-- Script Modules -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
