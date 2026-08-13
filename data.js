@@ -11,11 +11,11 @@ export const friendsData = [
     color: "#ff6b8b",
     envelopeColor: "#ff8fa3",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-    letter: `Nggak berasa ya 2 bulan magang ini udah kelar, dan sejujurnya gua bakal sedih banget karena habis ini kita bakal jauhan. Lu tuh bener-bener orang paling baik yang pernah gua kenal pas magang, bahkan sering banget nraktir gua sampai gua bingung harus bales kebaikan lu pakai cara apa lagi!
+    letter: `Nggak berasa ya 2 bulan magang ini udah kelar, dan sejujurnya gua bakal sedih banget karena habis ini kita bakal jauhan. Lu tuh bener-bener orang paling baik yang pernah gua kenal pas magang. Selama kita di Jakarta ini, lu tuh banyak banget ngebantu gua dari hal kecil sampai hal besar. Lu tuh perhatian banget ke gua, bahkan sering banget nraktir gua makan sampai gua beneran bingung harus bales semua kebaikan dan perhatian lu pakai cara apa lagi!
 
-Lucunya, banyak banget hal yang udah kita lewatin bareng. Lu tuh udah tahu semua isi HP gua tanpa sisa, tapi giliran gua yang coba-coba buka isi HP lu, lu malah marah-marah gak jelass! padahal bukan gua doang yang liat itu isi drive. Momen-momen random itu yang bakal paling gua kangenin.
+Lucunya, banyak banget momen random yang udah kita lewatin bareng. Lu tuh udah tahu semua rahasia dan isi HP gua tanpa sisa wkwk. Tapi giliran gua yang coba-coba mau buka isi HP lu, lu malah marah-marah gak jelas! Padahal bukan gua doang yang liat itu isi drive lu wkwk. Momen-momen ngakak dan bercandain rapli kayak gitu yang jujur bakal gua kangenin nanti.
 
-Makasih banyak ya Ri buat semua kebaikan, traktiran, dan kebersamaannya. Sangat berterima kasih sampai bingung gimana balesnya. Semoga sukses terus kuliah dan karir lu ke depannya, jangan sampai putus kontak ya beb!`,
+Makasih banyak ya Ri buat semua kebaikan lu, perhatian lu, bantuan lu yang luar biasa pas di Jakarta, dan kebersamaan 2 bulan ini. Gua sangat berterima kasih punya sahabat sebaik dan se-perhatian lu. Semoga sukses terus kuliahnya, karir lu makin melonjak ke depannya, dan kalau nanti gua call atau VC diangkat yaa! Jangan pernah putus kontak sama gua beb!`,
     specialWish: "Semoga Fachri selalu dilimpahkan rezeki, sukses karirnya, dan persahabatan kita tetap awet.",
     quote: "Sahabat sejati adalah orang yang tahu semua rahasiamu tapi tetap jadi yang paling baik."
   },
@@ -31,7 +31,7 @@ Makasih banyak ya Ri buat semua kebaikan, traktiran, dan kebersamaannya. Sangat 
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
     letter: `2 bulan magang bareng lu tuh seru banget! Walaupun di antara kita mungkin ada beberapa momen yang bikin bersinggungan kayak pas insiden tutup kunci motor lu rusak sampai motornya harus distut/didorong bareng-bareng, terus pas botol minum lu pernah jatuh... Dari hati gua mau minta maaf ya kalau ada salah atau kejahilan dan tidak kesengajaan selama ini!
 
-Tapi serius, Ca, lu tuh orangnya asik banget, super ramah, dan gampang banget berbaur sama siapa aja. Kehadiran lu selalu bikin suasana magang jadi hangat dan hidup.
+Tapi serius, Ca, lu tuh orangnya asik banget, super ramah, dan gampang banget berbaur sama siapa aja. Kehadiran lu selalu bikin suasana magang jadi hangat dan hidup. Mana lu juga sering banget ngasih buah buat anak-anak magang dan buat gua, asli perhatian banget!
 
 Makasih ya Ica udah jadi teman magang yang baik banget. Semoga kuliah lu lancar terus, skripsi dipermudah, dan sukses selalu di mana pun lu berada!`,
     specialWish: "Tetap jadi Ica yang ceria, mudah berbaur, dan sukses buat semua cita-citamu.",
@@ -93,7 +93,6 @@ Makasih ya Kalila buat semua kebaikan dan kerja kerasnya di divisi Sosial. Semog
   }
 ];
 
-// Galeri Momen disesuaikan dengan foto asli (bps1: Villa, bps2: Spider-Man & Jean Grey, bps3: Sapi, bps4: Rompi BPS)
 export const galleryMemories = [
   {
     id: 1,
