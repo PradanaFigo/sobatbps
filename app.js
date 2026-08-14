@@ -5,7 +5,7 @@ let typewriterTimeout = null;
 let sweetWordsTimeout = null;
 let isAudioPlaying = false;
 let audioSynthCtx = null;
-let audioOscillators = [];
+let audioInterval = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeartsCanvas();
@@ -63,7 +63,6 @@ function init4StageIntroFlow() {
   const introSearchForm = document.getElementById('introSearchForm');
   const introNameInput = document.getElementById('introNameInput');
 
-  // STAGE 1: Click Gift Capsule -> Show Emotional Sweet Words Stage FIRST!
   if (giftIconBtn && introGiftBox && sweetWordsStage) {
     giftIconBtn.addEventListener('click', (e) => {
       triggerHeartFireworksBurst(e.clientX, e.clientY);
@@ -77,7 +76,6 @@ function init4StageIntroFlow() {
     });
   }
 
-  // STAGE 2: Click Next -> Show 4 Photos Side-By-Side in 1 Row!
   if (nextToPhotosBtn && sweetWordsStage && photoParade) {
     nextToPhotosBtn.addEventListener('click', (e) => {
       triggerHeartFireworksBurst(e.clientX, e.clientY);
@@ -95,7 +93,6 @@ function init4StageIntroFlow() {
     });
   }
 
-  // STAGE 3: Click Next -> Show Name Gatekeeper Input
   if (nextToNameBtn && photoParade && introNameGate) {
     nextToNameBtn.addEventListener('click', (e) => {
       triggerHeartFireworksBurst(e.clientX, e.clientY);
@@ -104,7 +101,6 @@ function init4StageIntroFlow() {
     });
   }
 
-  // STAGE 4: Submit Name in Intro Gate -> Show Interactive Giant 3D Envelope
   if (introSearchForm && introNameInput) {
     const handleIntroUnlock = () => {
       const query = introNameInput.value.trim().toLowerCase();
@@ -443,7 +439,6 @@ function prepareEnvelopeOpeningStage(friend) {
   animEnvelopeObj.classList.remove('open');
   animOverlay.classList.add('active');
 
-  // Listen for user CLICK on giant envelope to unseal!
   const unsealHandler = (e) => {
     giantTarget.removeEventListener('click', unsealHandler);
     triggerHeartFireworksBurst(e.clientX, e.clientY);
@@ -499,7 +494,8 @@ function typeWriterEffect(element, text) {
 }
 
 /* ==========================================================
-   SINGLE SWEET SOUNDTRACK SYNTHESIZER
+   SWEET FAREWELL SOUNDTRACK SYNTHESIZER ("INGATLAH HARI INI")
+   Acoustic Arpeggio Chord Progression: Fmaj7 -> Cmaj7 -> Dm7 -> Bbmaj7
    ========================================================== */
 function playChimeSound() {
   try {
@@ -538,7 +534,7 @@ function initAudioPlayer() {
       startAmbientMusic();
       icon.className = 'fa-solid fa-pause';
       isAudioPlaying = true;
-      showToast('Memainkan musik kenangan...');
+      showToast('Memainkan "Ingatlah Hari Ini"... 🎵');
     }
   });
 }
@@ -546,33 +542,52 @@ function initAudioPlayer() {
 function startAmbientMusic() {
   try {
     audioSynthCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const sweetNotes = [349.23, 440.00, 523.25, 659.25];
+    
+    // Warm arpeggiated acoustic notes (F4, A4, C5, E5, G5, D5, A5)
+    const melodyPattern = [
+      349.23, 440.00, 523.25, 659.25,
+      261.63, 329.63, 392.00, 493.88,
+      293.66, 349.23, 440.00, 523.25,
+      233.08, 293.66, 349.23, 440.00
+    ];
 
-    audioOscillators = sweetNotes.map(freq => {
+    let noteIdx = 0;
+
+    const playNextTone = () => {
+      if (!isAudioPlaying || !audioSynthCtx) return;
+
+      const freq = melodyPattern[noteIdx % melodyPattern.length];
+      noteIdx++;
+
       const osc = audioSynthCtx.createOscillator();
       const gain = audioSynthCtx.createGain();
 
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, audioSynthCtx.currentTime);
-      gain.gain.setValueAtTime(0.025, audioSynthCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.06, audioSynthCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioSynthCtx.currentTime + 0.8);
 
       osc.connect(gain);
       gain.connect(audioSynthCtx.destination);
+
       osc.start();
-      return { osc, gain };
-    });
+      osc.stop(audioSynthCtx.currentTime + 0.85);
+    };
+
+    playNextTone();
+    audioInterval = setInterval(playNextTone, 420);
   } catch (e) {}
 }
 
 function stopAmbientMusic() {
-  if (audioOscillators) {
-    audioOscillators.forEach(({ osc }) => {
-      try { osc.stop(); } catch (e) {}
-    });
-    audioOscillators = [];
+  if (audioInterval) {
+    clearInterval(audioInterval);
+    audioInterval = null;
   }
   if (audioSynthCtx) {
     try { audioSynthCtx.close(); } catch (e) {}
+    audioSynthCtx = null;
   }
 }
 
