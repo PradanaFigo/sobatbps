@@ -124,26 +124,15 @@ function init4StageIntroFlow() {
       e.preventDefault();
       handleIntroUnlock();
     });
-
-    introNameInput.addEventListener('input', () => {
-      const query = introNameInput.value.trim().toLowerCase();
-      if (query.length >= 2) {
-        const found = friendsData.find(f => 
-          f.name.toLowerCase() === query ||
-          f.nicknames.some(nick => nick.toLowerCase() === query)
-        );
-        if (found) {
-          triggerHeartFireworksBurst();
-          document.getElementById('introStageOverlay')?.classList.remove('active');
-          prepareEnvelopeOpeningStage(found);
-        }
-      }
-    });
   }
 }
 
 function typeWriterSweetWords(element, text) {
   if (!element) return;
+  if (sweetWordsTimeout) {
+    clearTimeout(sweetWordsTimeout);
+    sweetWordsTimeout = null;
+  }
   element.textContent = '';
   let index = 0;
   const speed = 25;
@@ -221,7 +210,6 @@ function initHeartsCanvas() {
     ctx.moveTo(x, y + topCurveHeight);
     ctx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + topCurveHeight);
     ctx.bezierCurveTo(x - size / 2, y + (size + topCurveHeight) / 2, x, y + size, x, y + size);
-    ctx.bezierCurveTo(x, y + (size + topCurveHeight) / 2, x + size / 2, y + (size + topCurveHeight) / 2, x + size / 2, y + topCurveHeight);
     ctx.bezierCurveTo(x, y + (size + topCurveHeight) / 2, x + size / 2, y + (size + topCurveHeight) / 2, x + size / 2, y + topCurveHeight);
     ctx.bezierCurveTo(x + size / 2, y, x, y, x, y + topCurveHeight);
     ctx.closePath();
@@ -372,20 +360,6 @@ function setupEventListeners() {
       e.preventDefault();
       handleNameUnlock();
     });
-
-    nameInput.addEventListener('input', () => {
-      const query = nameInput.value.trim().toLowerCase();
-      if (query.length >= 2) {
-        const found = friendsData.find(f => 
-          f.name.toLowerCase() === query ||
-          f.nicknames.some(nick => nick.toLowerCase() === query)
-        );
-        if (found) {
-          triggerHeartFireworksBurst();
-          prepareEnvelopeOpeningStage(found);
-        }
-      }
-    });
   }
 
   if (closeModalBtn) closeModalBtn.addEventListener('click', closeLetterModal);
@@ -464,6 +438,11 @@ function openLetterModal(friend) {
 
   if (!modal) return;
 
+  if (typewriterTimeout) {
+    clearTimeout(typewriterTimeout);
+    typewriterTimeout = null;
+  }
+
   if (modalName) modalName.textContent = friend.name;
   if (modalLetterText) modalLetterText.textContent = '';
 
@@ -475,12 +454,23 @@ function openLetterModal(friend) {
 function closeLetterModal() {
   const modal = document.getElementById('letterModal');
   if (modal) modal.classList.remove('active');
-  if (typewriterTimeout) clearTimeout(typewriterTimeout);
+  if (typewriterTimeout) {
+    clearTimeout(typewriterTimeout);
+    typewriterTimeout = null;
+  }
 }
 
 function typeWriterEffect(element, text) {
+  if (typewriterTimeout) {
+    clearTimeout(typewriterTimeout);
+    typewriterTimeout = null;
+  }
+
+  if (!element) return;
+  element.textContent = '';
+
   let index = 0;
-  const speed = 18;
+  const speed = 16;
 
   function type() {
     if (index < text.length) {
@@ -534,7 +524,7 @@ function initAudioPlayer() {
       startAmbientMusic();
       icon.className = 'fa-solid fa-pause';
       isAudioPlaying = true;
-      showToast('Memainkan "Ingatlah Hari Ini"... 🎵');
+      showToast('Memainkan BGM "Ingatlah Hari Ini"... 🎵');
     }
   });
 }

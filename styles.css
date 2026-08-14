@@ -1306,22 +1306,24 @@ body {
 }
 
 /* ==========================================================
-   HD HEBOH FLOATING HEARTS PDF EXPORT PRESET 💖🌸✨
+   HD PERFECT 1-PAGE PDF EXPORT PRESET (EXACTLY 1 PAGE 1/1)
    Displays 50+ floating hearts rain, NO X button, NO action buttons!
    ========================================================== */
 @media print {
   @page {
-    margin: 0;
-    size: auto;
+    margin: 0 !important;
+    size: portrait !important;
   }
 
-  body {
+  html, body {
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: linear-gradient(135deg, #ff758f 0%, #ff8fa3 40%, #ffccd5 75%, #f5d0fe 100%) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    min-height: 100vh !important;
+    overflow: hidden !important;
   }
 
   /* Keep particles canvas VISIBLE so floating hearts rain over PDF background! */
@@ -1348,11 +1350,11 @@ body {
 
   /* Display ONLY letter modal centered on PDF export page */
   .modal-overlay#letterModal {
-    position: absolute !important;
+    position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
+    width: 100vw !important;
+    height: 100vh !important;
     background: linear-gradient(135deg, #ff477e 0%, #ff8fa3 45%, #ffccd5 75%, #f5d0fe 100%) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
@@ -1361,21 +1363,24 @@ body {
     justify-content: center !important;
     opacity: 1 !important;
     visibility: visible !important;
-    padding: 1.5rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
     z-index: 1000 !important;
   }
 
   .letter-container {
-    width: 100% !important;
-    max-width: 660px !important;
+    width: 88% !important;
+    max-width: 620px !important;
     max-height: none !important;
-    border: 6px double #ff477e !important;
-    border-radius: 36px !important;
-    background: rgba(255, 255, 255, 0.96) !important;
-    box-shadow: 0 30px 90px rgba(255, 71, 126, 0.55), 0 0 60px rgba(255, 182, 193, 0.8) !important;
+    border: 5px double #ff477e !important;
+    border-radius: 28px !important;
+    background: rgba(255, 255, 255, 0.97) !important;
+    box-shadow: 0 20px 60px rgba(255, 71, 126, 0.5) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     page-break-inside: avoid !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
     position: relative !important;
     transform: none !important;
     overflow: visible !important;
@@ -1385,18 +1390,18 @@ body {
   .pdf-heart {
     display: block !important;
     position: absolute !important;
-    font-size: 2.4rem !important;
+    font-size: 2.2rem !important;
     z-index: 15 !important;
     filter: drop-shadow(0 4px 15px rgba(255, 71, 126, 0.65)) !important;
   }
-  .pdf-heart.h1 { top: -25px !important; left: 30px !important; transform: rotate(-15deg); }
-  .pdf-heart.h2 { top: -25px !important; right: 40px !important; transform: rotate(15deg); }
-  .pdf-heart.h3 { top: 40% !important; left: -25px !important; transform: rotate(-25deg); }
-  .pdf-heart.h4 { top: 45% !important; right: -25px !important; transform: rotate(20deg); }
-  .pdf-heart.h5 { bottom: -20px !important; left: 40px !important; transform: rotate(10deg); }
-  .pdf-heart.h6 { bottom: -20px !important; right: 50px !important; transform: rotate(-10deg); }
-  .pdf-heart.h7 { top: 18% !important; right: -22px !important; font-size: 1.8rem !important; }
-  .pdf-heart.h8 { bottom: 25% !important; left: -22px !important; font-size: 1.8rem !important; }
+  .pdf-heart.h1 { top: -20px !important; left: 25px !important; transform: rotate(-15deg); }
+  .pdf-heart.h2 { top: -20px !important; right: 30px !important; transform: rotate(15deg); }
+  .pdf-heart.h3 { top: 40% !important; left: -20px !important; transform: rotate(-25deg); }
+  .pdf-heart.h4 { top: 45% !important; right: -20px !important; transform: rotate(20deg); }
+  .pdf-heart.h5 { bottom: -18px !important; left: 30px !important; transform: rotate(10deg); }
+  .pdf-heart.h6 { bottom: -18px !important; right: 35px !important; transform: rotate(-10deg); }
+  .pdf-heart.h7 { top: 18% !important; right: -18px !important; font-size: 1.6rem !important; }
+  .pdf-heart.h8 { bottom: 25% !important; left: -18px !important; font-size: 1.6rem !important; }
 
   .card-memory-tag {
     display: inline-flex !important;
@@ -1404,47 +1409,48 @@ body {
     border: 2px solid #ffb3c1 !important;
     color: #e60049 !important;
     font-weight: 800 !important;
-    font-size: 0.9rem !important;
-    padding: 0.45rem 1.25rem !important;
+    font-size: 0.85rem !important;
+    padding: 0.35rem 1.1rem !important;
     border-radius: 50px !important;
-    margin-bottom: 0.9rem !important;
+    margin-bottom: 0.75rem !important;
     box-shadow: 0 4px 15px rgba(255, 71, 126, 0.2) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
   .letter-body {
-    padding: 3.2rem 2.75rem 2.4rem 2.75rem !important;
+    padding: 2.2rem 2.2rem 1.8rem 2.2rem !important;
     max-height: none !important;
     overflow: visible !important;
   }
 
   .letter-header {
-    border-bottom: 3px dashed #ffb3c1 !important;
-    padding-bottom: 1.25rem !important;
-    margin-bottom: 1.75rem !important;
+    border-bottom: 2.5px dashed #ffb3c1 !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 1.25rem !important;
   }
 
   .letter-receiver-info h2 {
-    font-size: 2.4rem !important;
+    font-size: 2.1rem !important;
     color: #e60049 !important;
   }
 
   .letter-content-text {
-    font-size: 1.15rem !important;
-    line-height: 1.85 !important;
+    font-size: 1.05rem !important;
+    line-height: 1.75 !important;
     color: #2b1b26 !important;
     white-space: pre-line !important;
     text-align: justify !important;
+    margin-bottom: 1.5rem !important;
   }
 
   .letter-footer {
-    border-top: 2px solid #ffe4e8 !important;
-    padding-top: 1.25rem !important;
+    border-top: 1.5px solid #ffe4e8 !important;
+    padding-top: 1rem !important;
   }
 
   .signature-text {
-    font-size: 2.8rem !important;
+    font-size: 2.4rem !important;
     color: #ff477e !important;
   }
 }
