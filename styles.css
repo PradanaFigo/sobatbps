@@ -268,6 +268,7 @@ body {
     color: #372834;
     max-width: 680px;
     margin: 1rem auto 0 auto;
+    text-align: left;
   }
 }
 
@@ -991,13 +992,16 @@ body {
   line-height: 1.2;
 }
 
+/* CLEAN, ULTRA-NEAT LETTER CONTENT FORMATTING */
 .letter-content-text {
   font-family: var(--font-serif);
   font-size: 1.18rem;
-  line-height: 1.9;
+  line-height: 1.95;
   color: #372834;
   white-space: pre-line;
   margin-bottom: 2.5rem;
+  text-align: justify;
+  letter-spacing: 0.01em;
 }
 
 .letter-footer {
@@ -1214,6 +1218,7 @@ body {
   .sweet-words-text {
     font-size: 1.05rem;
     line-height: 1.7;
+    text-align: left;
   }
   .parade-photos-row-4 {
     grid-template-columns: repeat(2, 1fr);
@@ -1286,7 +1291,8 @@ body {
   }
   .letter-content-text {
     font-size: 1.02rem;
-    line-height: 1.75;
+    line-height: 1.8;
+    text-align: left;
   }
   .modal-actions {
     flex-direction: column;
@@ -1429,6 +1435,7 @@ body {
     line-height: 1.85 !important;
     color: #2b1b26 !important;
     white-space: pre-line !important;
+    text-align: justify !important;
   }
 
   .letter-footer {
