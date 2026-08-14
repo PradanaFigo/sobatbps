@@ -484,8 +484,8 @@ function typeWriterEffect(element, text) {
 }
 
 /* ==========================================================
-   SWEET FAREWELL SOUNDTRACK SYNTHESIZER ("INGATLAH HARI INI")
-   Acoustic Arpeggio Chord Progression: Fmaj7 -> Cmaj7 -> Dm7 -> Bbmaj7
+   UPBEAT & CHEERFUL FAREWELL SOUNDTRACK SYNTHESIZER
+   Bright, happy, energetic acoustic guitar / ukulele bounce!
    ========================================================== */
 function playChimeSound() {
   try {
@@ -524,7 +524,7 @@ function initAudioPlayer() {
       startAmbientMusic();
       icon.className = 'fa-solid fa-pause';
       isAudioPlaying = true;
-      showToast('Memainkan BGM "Ingatlah Hari Ini"... 🎵');
+      showToast('Memainkan Musik Ceria "Ingatlah Hari Ini"... 🎵');
     }
   });
 }
@@ -533,12 +533,12 @@ function startAmbientMusic() {
   try {
     audioSynthCtx = new (window.AudioContext || window.webkitAudioContext)();
     
-    // Warm arpeggiated acoustic notes (F4, A4, C5, E5, G5, D5, A5)
-    const melodyPattern = [
-      349.23, 440.00, 523.25, 659.25,
-      261.63, 329.63, 392.00, 493.88,
-      293.66, 349.23, 440.00, 523.25,
-      233.08, 293.66, 349.23, 440.00
+    // Upbeat, cheerful, energetic major pentatonic notes (Ukulele / Acoustic Guitar Bounce Style)
+    const cheerfulNotes = [
+      349.23, 440.00, 523.25, 698.46,
+      440.00, 523.25, 659.25, 783.99,
+      523.25, 659.25, 783.99, 880.00,
+      349.23, 523.25, 698.46, 1046.50
     ];
 
     let noteIdx = 0;
@@ -546,27 +546,27 @@ function startAmbientMusic() {
     const playNextTone = () => {
       if (!isAudioPlaying || !audioSynthCtx) return;
 
-      const freq = melodyPattern[noteIdx % melodyPattern.length];
+      const freq = cheerfulNotes[noteIdx % cheerfulNotes.length];
       noteIdx++;
 
       const osc = audioSynthCtx.createOscillator();
       const gain = audioSynthCtx.createGain();
 
-      osc.type = 'sine';
+      osc.type = 'triangle'; // Ceria & renyah seperti petikan gitar akustik / ukulele
       osc.frequency.setValueAtTime(freq, audioSynthCtx.currentTime);
 
-      gain.gain.setValueAtTime(0.06, audioSynthCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioSynthCtx.currentTime + 0.8);
+      gain.gain.setValueAtTime(0.08, audioSynthCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioSynthCtx.currentTime + 0.35);
 
       osc.connect(gain);
       gain.connect(audioSynthCtx.destination);
 
       osc.start();
-      osc.stop(audioSynthCtx.currentTime + 0.85);
+      osc.stop(audioSynthCtx.currentTime + 0.38);
     };
 
     playNextTone();
-    audioInterval = setInterval(playNextTone, 420);
+    audioInterval = setInterval(playNextTone, 220); // Faster upbeat tempo (220ms)!
   } catch (e) {}
 }
 
