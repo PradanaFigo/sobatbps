@@ -482,8 +482,8 @@ function typeWriterEffect(element, text) {
 }
 
 /* ==========================================================
-   UPBEAT & CHEERFUL FAREWELL SOUNDTRACK SYNTHESIZER
-   Bright, happy, energetic acoustic guitar / ukulele bounce!
+   DEEPLY TOUCHING & MELANCHOLIC FAREWELL SOUNDTRACK SYNTHESIZER
+   Slow, emotional piano arpeggiated chord progression (Am -> Fmaj7 -> C -> G/B)
    ========================================================== */
 function playChimeSound() {
   try {
@@ -522,7 +522,7 @@ function initAudioPlayer() {
       startAmbientMusic();
       icon.className = 'fa-solid fa-pause';
       isAudioPlaying = true;
-      showToast('Memainkan Musik Ceria "Ingatlah Hari Ini"... 🎵');
+      showToast('Memainkan Musik Haru "Ingatlah Hari Ini"... 🎵');
     }
   });
 }
@@ -531,12 +531,12 @@ function startAmbientMusic() {
   try {
     audioSynthCtx = new (window.AudioContext || window.webkitAudioContext)();
     
-    // Upbeat, cheerful, energetic major pentatonic notes (Ukulele / Acoustic Guitar Bounce Style)
-    const cheerfulNotes = [
-      349.23, 440.00, 523.25, 698.46,
-      440.00, 523.25, 659.25, 783.99,
-      523.25, 659.25, 783.99, 880.00,
-      349.23, 523.25, 698.46, 1046.50
+    // Slow, deeply emotional, melancholic piano arpeggios (Am -> Fmaj7 -> C -> G/B)
+    const emotionalSadNotes = [
+      220.00, 261.63, 329.63, 440.00, // Am
+      174.61, 220.00, 261.63, 329.63, // Fmaj7
+      130.81, 164.81, 196.00, 261.63, // C
+      196.00, 246.94, 293.66, 392.00  // G/B
     ];
 
     let noteIdx = 0;
@@ -544,27 +544,27 @@ function startAmbientMusic() {
     const playNextTone = () => {
       if (!isAudioPlaying || !audioSynthCtx) return;
 
-      const freq = cheerfulNotes[noteIdx % cheerfulNotes.length];
+      const freq = emotionalSadNotes[noteIdx % emotionalSadNotes.length];
       noteIdx++;
 
       const osc = audioSynthCtx.createOscillator();
       const gain = audioSynthCtx.createGain();
 
-      osc.type = 'triangle';
+      osc.type = 'sine'; // Soft, warm, touching piano tone
       osc.frequency.setValueAtTime(freq, audioSynthCtx.currentTime);
 
-      gain.gain.setValueAtTime(0.08, audioSynthCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioSynthCtx.currentTime + 0.35);
+      gain.gain.setValueAtTime(0.065, audioSynthCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioSynthCtx.currentTime + 0.95);
 
       osc.connect(gain);
       gain.connect(audioSynthCtx.destination);
 
       osc.start();
-      osc.stop(audioSynthCtx.currentTime + 0.38);
+      osc.stop(audioSynthCtx.currentTime + 1.0);
     };
 
     playNextTone();
-    audioInterval = setInterval(playNextTone, 220);
+    audioInterval = setInterval(playNextTone, 460); // Slow, touching, syahdu tempo!
   } catch (e) {}
 }
 
