@@ -106,9 +106,11 @@ function init4StageIntroFlow() {
       const query = introNameInput.value.trim().toLowerCase();
       if (!query) return;
 
+      // STRICT EXACT FULL-NAME MATCHING ONLY!
       const found = friendsData.find(f => 
         f.name.toLowerCase() === query ||
-        f.nicknames.some(nick => nick.toLowerCase() === query || nick.toLowerCase().includes(query))
+        f.fullName.toLowerCase() === query ||
+        f.nicknames.some(nick => nick.toLowerCase() === query)
       );
 
       if (found) {
@@ -116,7 +118,7 @@ function init4StageIntroFlow() {
         document.getElementById('introStageOverlay')?.classList.remove('active');
         prepareEnvelopeOpeningStage(found);
       } else {
-        showToast(`Oppss! Nama "${introNameInput.value}" belum cocok. Coba ketik namamu sendiri (Fachri, Ica, Cynthia, Nandra, atau Kalila) ya!`);
+        showToast(`Oppss! Nama "${introNameInput.value}" belum tepat. Harus mengetik nama lengkap (Fachri, Ica, Cynthia, Nandra, atau Kalila) ya!`);
       }
     };
 
@@ -343,16 +345,18 @@ function setupEventListeners() {
       const query = nameInput.value.trim().toLowerCase();
       if (!query) return;
 
+      // STRICT EXACT FULL-NAME MATCHING ONLY!
       const found = friendsData.find(f => 
         f.name.toLowerCase() === query ||
-        f.nicknames.some(nick => nick.toLowerCase() === query || nick.toLowerCase().includes(query))
+        f.fullName.toLowerCase() === query ||
+        f.nicknames.some(nick => nick.toLowerCase() === query)
       );
 
       if (found) {
         triggerHeartFireworksBurst();
         prepareEnvelopeOpeningStage(found);
       } else {
-        showToast(`Oppss! Nama "${nameInput.value}" belum cocok. Coba ketik namamu sendiri (Fachri, Ica, Cynthia, Nandra, atau Kalila) ya!`);
+        showToast(`Oppss! Nama "${nameInput.value}" belum tepat. Harus mengetik nama lengkap (Fachri, Ica, Cynthia, Nandra, atau Kalila) ya!`);
       }
     };
 
@@ -552,7 +556,7 @@ function startAmbientMusic() {
       const osc = audioSynthCtx.createOscillator();
       const gain = audioSynthCtx.createGain();
 
-      osc.type = 'triangle'; // Ceria & renyah seperti petikan gitar akustik / ukulele
+      osc.type = 'triangle';
       osc.frequency.setValueAtTime(freq, audioSynthCtx.currentTime);
 
       gain.gain.setValueAtTime(0.08, audioSynthCtx.currentTime);
@@ -566,7 +570,7 @@ function startAmbientMusic() {
     };
 
     playNextTone();
-    audioInterval = setInterval(playNextTone, 220); // Faster upbeat tempo (220ms)!
+    audioInterval = setInterval(playNextTone, 220);
   } catch (e) {}
 }
 
