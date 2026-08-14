@@ -1,8 +1,8 @@
 import { friendsData, galleryMemories, statistics } from './data.js';
 
 let activeLetter = null;
-let typewriterTimeout = null;
-let sweetWordsTimeout = null;
+let currentTypewriterToken = 0;
+let currentSweetWordsToken = 0;
 let isAudioPlaying = false;
 let audioSynthCtx = null;
 let audioInterval = null;
@@ -131,19 +131,18 @@ function init4StageIntroFlow() {
 
 function typeWriterSweetWords(element, text) {
   if (!element) return;
-  if (sweetWordsTimeout) {
-    clearTimeout(sweetWordsTimeout);
-    sweetWordsTimeout = null;
-  }
+  const myToken = ++currentSweetWordsToken;
   element.textContent = '';
   let index = 0;
-  const speed = 25;
+  const speed = 20;
 
   function type() {
+    if (myToken !== currentSweetWordsToken) return;
+
     if (index < text.length) {
       element.textContent += text.charAt(index);
       index++;
-      sweetWordsTimeout = setTimeout(type, speed);
+      setTimeout(type, speed);
     }
   }
 
@@ -442,11 +441,6 @@ function openLetterModal(friend) {
 
   if (!modal) return;
 
-  if (typewriterTimeout) {
-    clearTimeout(typewriterTimeout);
-    typewriterTimeout = null;
-  }
-
   if (modalName) modalName.textContent = friend.name;
   if (modalLetterText) modalLetterText.textContent = '';
 
@@ -458,29 +452,29 @@ function openLetterModal(friend) {
 function closeLetterModal() {
   const modal = document.getElementById('letterModal');
   if (modal) modal.classList.remove('active');
-  if (typewriterTimeout) {
-    clearTimeout(typewriterTimeout);
-    typewriterTimeout = null;
-  }
+  // Cancel typewriter by incrementing token
+  currentTypewriterToken++;
 }
 
+/* BULLETPROOF TOKEN-BASED TYPEWRITER (NEVER SCRAMBLES OR OVERLAPS!) */
 function typeWriterEffect(element, text) {
-  if (typewriterTimeout) {
-    clearTimeout(typewriterTimeout);
-    typewriterTimeout = null;
-  }
-
   if (!element) return;
+
+  // Increment token so any previous running typewriter loop IMMEDIATELY ABORTS!
+  const myToken = ++currentTypewriterToken;
   element.textContent = '';
 
   let index = 0;
-  const speed = 16;
+  const speed = 14;
 
   function type() {
+    // If a new typewriter was triggered, STOP IMMEDIATELY!
+    if (myToken !== currentTypewriterToken) return;
+
     if (index < text.length) {
       element.textContent += text.charAt(index);
       index++;
-      typewriterTimeout = setTimeout(type, speed);
+      setTimeout(type, speed);
     }
   }
 
