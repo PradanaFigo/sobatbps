@@ -482,8 +482,8 @@ function typeWriterEffect(element, text) {
 }
 
 /* ==========================================================
-   DEEPLY TOUCHING & MELANCHOLIC FAREWELL SOUNDTRACK SYNTHESIZER
-   Slow, emotional piano arpeggiated chord progression (Am -> Fmaj7 -> C -> G/B)
+   SWEET DUAL-HARMONY ACOUSTIC FAREWELL SOUNDTRACK SYNTHESIZER
+   Nostalgic, warm, 2-part acoustic chime harmony (Cmaj7 -> G -> Am7 -> Fmaj7)
    ========================================================== */
 function playChimeSound() {
   try {
@@ -522,7 +522,7 @@ function initAudioPlayer() {
       startAmbientMusic();
       icon.className = 'fa-solid fa-pause';
       isAudioPlaying = true;
-      showToast('Memainkan Musik Haru "Ingatlah Hari Ini"... 🎵');
+      showToast('Memainkan Musik Kenangan... 🎵');
     }
   });
 }
@@ -531,12 +531,16 @@ function startAmbientMusic() {
   try {
     audioSynthCtx = new (window.AudioContext || window.webkitAudioContext)();
     
-    // Slow, deeply emotional, melancholic piano arpeggios (Am -> Fmaj7 -> C -> G/B)
-    const emotionalSadNotes = [
-      220.00, 261.63, 329.63, 440.00, // Am
-      174.61, 220.00, 261.63, 329.63, // Fmaj7
-      130.81, 164.81, 196.00, 261.63, // C
-      196.00, 246.94, 293.66, 392.00  // G/B
+    // Rich 2-Note Harmonious Acoustic Chime Progression (Cmaj7 -> G -> Am7 -> Fmaj7)
+    const harmonyMelody = [
+      { base: 523.25, harmony: 659.25 }, // C5 + E5
+      { base: 392.00, harmony: 587.33 }, // G4 + D5
+      { base: 440.00, harmony: 523.25 }, // A4 + C5
+      { base: 349.23, harmony: 440.00 }, // F4 + A4
+      { base: 659.25, harmony: 783.99 }, // E5 + G5
+      { base: 587.33, harmony: 698.46 }, // D5 + F5
+      { base: 523.25, harmony: 659.25 }, // C5 + E5
+      { base: 440.00, harmony: 587.33 }  // A4 + D5
     ];
 
     let noteIdx = 0;
@@ -544,27 +548,30 @@ function startAmbientMusic() {
     const playNextTone = () => {
       if (!isAudioPlaying || !audioSynthCtx) return;
 
-      const freq = emotionalSadNotes[noteIdx % emotionalSadNotes.length];
+      const pair = harmonyMelody[noteIdx % harmonyMelody.length];
       noteIdx++;
 
-      const osc = audioSynthCtx.createOscillator();
-      const gain = audioSynthCtx.createGain();
+      [pair.base, pair.harmony].forEach((freq, idx) => {
+        const osc = audioSynthCtx.createOscillator();
+        const gain = audioSynthCtx.createGain();
 
-      osc.type = 'sine'; // Soft, warm, touching piano tone
-      osc.frequency.setValueAtTime(freq, audioSynthCtx.currentTime);
+        osc.type = idx === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, audioSynthCtx.currentTime);
 
-      gain.gain.setValueAtTime(0.065, audioSynthCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioSynthCtx.currentTime + 0.95);
+        const vol = idx === 0 ? 0.055 : 0.035;
+        gain.gain.setValueAtTime(vol, audioSynthCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioSynthCtx.currentTime + 0.85);
 
-      osc.connect(gain);
-      gain.connect(audioSynthCtx.destination);
+        osc.connect(gain);
+        gain.connect(audioSynthCtx.destination);
 
-      osc.start();
-      osc.stop(audioSynthCtx.currentTime + 1.0);
+        osc.start();
+        osc.stop(audioSynthCtx.currentTime + 0.9);
+      });
     };
 
     playNextTone();
-    audioInterval = setInterval(playNextTone, 460); // Slow, touching, syahdu tempo!
+    audioInterval = setInterval(playNextTone, 380);
   } catch (e) {}
 }
 
